@@ -1,0 +1,57 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+	"height": 30,
+    "modules-left": ["hyprland/workspaces"],
+	"modules-center": [],
+    "modules-right": ["tray", "pulseaudio", "memory", "cpu", "battery", "clock"],
+    "hyprland/workspaces": {
+	"format": "{icon} {name}",
+	"on-click": "activate",
+	"on-scroll-up": "hyprctl dispatch workspace e+1",
+	"on-scroll-down": "hyprctl dispatch workspace e-1",
+	"format-icons": {
+	    "urgent": "",
+	    "active": "",
+	    "default": ""
+	},
+	"sort-by-number": true
+    },
+    "tray": {
+	"spacing": 5,
+    },
+    "pulseaudio": {
+	"scroll-step": 5.0,
+	"on-click": "pamixer -t",
+	"format": " {volume}%",
+	"format-muted": " {volume}%",
+    },
+    "memory": {
+	"format": "󰍛 {percentage}%"
+    },
+    "cpu": {
+	"format": " {usage}%"
+    },
+    "battery": {
+	"format": "{icon} {time} {capacity}%",
+	"format-time": " {H}:{M}",
+	"format-icons": ["", "", "", "", ""]
+    },
+    "clock": {
+	"format": "󰥔 {:%H:%M:%S}",
+	"format-alt": "󰥔 {:%a, %d. %b  %H:%M:%S}",
+	"interval": 1
+    },
+    "network": {
+	"interface": "wlp2s0",
+	"format": "{ifname}",
+	"format-wifi": "{essid} ({signalStrength}%) ",
+	"format-ethernet": "{ipaddr}/{cidr} 󰊗",
+	"format-disconnected": "",
+	"tooltip-format": "{ifname} via {gwaddr} 󰊗",
+	"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+	"tooltip-format-ethernet": "{ifname} ",
+	"tooltip-format-disconnected": "Disconnected",
+	"max-length": 50
+    }
+}

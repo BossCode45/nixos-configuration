@@ -1,0 +1,71 @@
+* {
+	font-family: "Cousine Nerd Font";
+	font-size: 13px;
+}
+window#waybar {
+	background-color: alpha(#292D3E, 0);
+}
+.modules-right {
+	margin-right: 7px;
+}
+.modules-right > * > * {
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 12px;
+	color: #eeffff;
+	background-color: #292D3E;
+}
+
+.modules-right > *:nth-child(1) > * {
+	background-color: shade(alpha(#c792ea, 1), 0.75);
+}
+.modules-right > *:nth-child(2) > * {
+	background-color: shade(alpha(#82aaff, 1), 0.75);
+}
+.modules-right > *:nth-child(3) > * {
+	background-color: shade(alpha(#c3e88d, 1), 0.75);
+}
+.modules-right > *:nth-child(4) > * {
+	background-color: shade(alpha(#89ddff, 1), 0.75);
+}
+.modules-right > *:nth-child(5) > * {
+	background-color: shade(alpha(#f78c6c, 1), 0.75);
+}
+.modules-right > *:nth-child(6) > * {
+	background-color: shade(alpha(#ffcb6b, 1), 0.75);
+}
+
+#workspaces {
+	background-color: #292D3E;
+	border-radius: 10px;
+	margin-left: 12px;
+	margin-bottom: 12px;
+}
+
+#workspaces button {
+	padding-left: 10px;
+	padding-right: 10px;
+	border: none;
+	color: #eeffff;
+}
+#workspaces button:hover {
+	box-shadow: none;
+	text-shadow: none;
+	background: none;
+	transition: none;
+	/*background-color: shade(alpha(#c792ea, 0.8), 0.75);
+	transition: background-color 0.2s;*/
+	color: shade(#c792ea, 0.75);
+	transition: color 0.2s;
+}
+.modules-center > * > * {
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	margin-bottom: 12px;
+	color: #eeffff;
+	background-color: #292D3E;
+}
