@@ -25,7 +25,7 @@
         enable = true;
         package = inputs.YATwm.packages.x86_64-linux.YATwm;
         useEmacsBinds = true;
-        quitKey = "s-g";
+        quitKey = "C-s-g";
         swapMods = true;
         keybinds = let
             left = "h";
@@ -81,6 +81,7 @@
             "s-S-9" = "wToWS 9";
             "s-0" = "changeWS 10";
             "s-S-0" = "wToWS 10";
+            # Special workspaces
             "s-p s" = "changeWS 11";
             "s-S-p s" = "wToWS 11";
         };
@@ -98,11 +99,11 @@
             {name = "S"; monitorPriorities = [1];}
         ];
         startup = [
-            #{command = ".config/polybar/launch.sh"; once = false;}
-            #{command = "picom --legacy-backends -fD 3"; once = false;}
-            #{command = "xss-lock --transfer-sleep-lock -- i3lock -eti ~/Documents/lockscreen.png --nofork"; bash = false;}
-            #{command = "nitrogen --restore";}
-            #{command = "nm-applet"; once = false; bash = false;}
+            {command = ".config/polybar/launch.sh"; once = false;}
+            {command = "picom --legacy-backends -fD 3"; once = false;}
+            {command = "xss-lock --transfer-sleep-lock -- i3lock -eti ~/Documents/lockscreen.png --nofork"; bash = false;}
+            {command = "nitrogen --restore";}
+            {command = "nm-applet"; once = false; bash = false;}
         ];
         #extraConfig = "bindmode normal\n" + (builtins.readFile ./config);
     };

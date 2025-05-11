@@ -18,6 +18,8 @@
         enable = true;
         xwayland.enable = true;
 	    systemd.variables = ["--all"];
+        #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        #portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
         settings = {
             "$mod" = "SUPER";
             exec-once = [
@@ -110,6 +112,7 @@
                 #touchpad.scroll_factor = 0.5;
                 accel_profile = "flat";
                 follow_mouse = true;
+                kb_options = "caps:super";
                 #sensitivity = 0.00;
             };
             decoration = {
@@ -124,8 +127,8 @@
                 "easeOutQuint,0.22,1,0.36,1"
             ];
             general = {
-                "col.inactive_border" = "rgb(2f2e43)";
-                "col.active_border" = "rgb(ab47bc)";
+                #"col.inactive_border" = "rgb(2f2e43)";
+                #"col.active_border" = "rgb(ab47bc)";
                 border_size = 2;
                 gaps_in = 6;
                 gaps_out = 12;

@@ -21,6 +21,14 @@
             #url = "git+file:///home/boss/Documents/Coding/WM/YATwm";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        # hyprland = {
+        #     url = "github:hyprwm/Hyprland";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
+        hyprlock = {
+            url = "github:hyprwm/hyprlock";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         nil = {
             url = "github:oxalica/nil";
             inputs.nixpkgs.follows = "nixpkgs";
