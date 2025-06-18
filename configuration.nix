@@ -25,14 +25,13 @@ in
     nix.nixPath = [ "/etc/nix/path" ];
     nix.registry.nixpkgs.flake = inputs.nixpkgs;
     environment.etc."nix/path/nixpkgs".source = inputs.nixpkgs;
-
     
     # Use the systemd-boot EFI boot loader.
     boot = {
         loader.grub.enable = true;
         loader.grub.device = "nodev";
         loader.grub.efiSupport = true;
-	loader.grub.enableCryptodisk = true;
+	    loader.grub.enableCryptodisk = true;
         # loader.grub.useOSProber = true;
         loader.efi.canTouchEfiVariables = true;
         kernel.sysctl."kernel.sysrq" = 502;
@@ -92,11 +91,12 @@ in
 		    package = pkgs.i3-gaps;
 	    };
 
-        #windowManager.YATwm = {
-        #    enable = true;
-        #    package = inputs.YATwm.packages.x86_64-linux.YATwm;
-        #};
+        windowManager.YATwm = {
+            enable = true;
+            package = inputs.YATwm.packages.x86_64-linux.YATwm;
+        };
 	};
+    programs.i3lock.enable = true;
     programs.hyprland = {
         enable = true;
         #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -104,12 +104,13 @@ in
     };
     services.displayManager = {
 		#defaultSession = "none+i3";
-		#sddm.enable = true;
+		sddm.enable = true;
         #sddm.theme = "catppuccin-macchiato";
-        #ly.enable = true;
-        
+        # ly.enable = true;
 	};
-	services.xserver.displayManager.lightdm.enable = true;
+	# services.xserver.displayManager = {
+    #     lightdm.enable = true;
+    # };
 
 	# Configure keymap in X11
 	services.xserver.xkb.layout = "us";
@@ -155,7 +156,8 @@ in
 	};
 
 	fonts.packages = with pkgs; [
-	    (nerdfonts.override { fonts = [ "Cousine" ]; })
+	    #(nerdfonts.override { fonts = [ "Cousine" ]; })
+        nerd-fonts.cousine
 	];
 
 	# List packages installed in system profile. To search, run:
@@ -171,9 +173,9 @@ in
                 "https://cache.nixos.org"
             ];
 
-            trusted-public-keys = [
-                "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-            ];
+            # trusted-public-keys = [
+            #     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+            # ];
         };
         gc = {
             automatic = true;
@@ -194,16 +196,13 @@ in
 	    ];
     documentation.dev.enable = true;
 
-    programs.steam.enable = true;
     hardware.graphics.enable32Bit = true;
-    nixpkgs.config.packageOverrides = pkgs: {
-        steam = pkgs.steam.override {
-            extraPkgs = pkgs: with pkgs; [
-                pango
-                # gamemode
-                harfbuzz
-            ];
-        };
+
+    programs.steam = {
+        enable = true;
+        extraCompatPackages = with pkgs; [
+            proton-ge-bin
+        ];
     };
 
 	# Some programs need SUID wrappers, can be configured further or are
@@ -225,6 +224,9 @@ in
         "f /var/lib/systemd/linger/boss" # enables lingering
     ];
 
+    
+    services.ratbagd.enable = true;
+
     stylix = {
         enable = true;
         
@@ -241,7 +243,7 @@ in
 
         fonts = {
             monospace = {
-                package = pkgs.nerdfonts.override { fonts = [ "Cousine" ]; };
+                package = pkgs.nerd-fonts.cousine;
                 name = "Cousine Nerd Font Mono";
             };
 
@@ -289,4 +291,3 @@ in
 	system.stateVersion = "24.05"; # Did you read the comment?
 
 }
-

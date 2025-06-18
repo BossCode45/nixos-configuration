@@ -8,6 +8,7 @@
         ./YATwm
         ./kitty
         inputs.spicetify-nix.homeManagerModules.default
+        inputs.nixcord.homeModules.nixcord
         #inputs.stylix.homeManagerModules.stylix
     ];
 
@@ -19,7 +20,7 @@
     
     # The home.packages option allows you to install Nix packages into your
     # environment.
-    nixpkgs.config.allowUnfree = true;
+    # nixpkgs.config.allowUnfree = true;
     home.packages = with pkgs; [
         feh
         pass
@@ -33,7 +34,9 @@
         discord
         # (discord.override {
         #     withOpenASAR = true;
+        #     withVencord = true;
         # })
+        # vesktop
         mumble
         gimp
         bottom
@@ -53,15 +56,6 @@
         lunar-client
         libnotify
         xclip
-        (openttd-jgrpp.overrideAttrs (oldAttrs: rec {
-            version = "0.63.3";
-            src = fetchFromGitHub {
-                owner = "JGRennison";
-                repo = "OpenTTD-patches";
-                rev = "jgrpp-${version}";
-                hash = "sha256-853LbApHqQn+ucb7xjFDfohB0/T1h11o4voBgvgbpSI=";
-            };
-        }))
         (python3.withPackages (ps: with ps; [
             python-lsp-server
         ]))
@@ -73,8 +67,11 @@
         inputs.polymc.packages.${system}.default
         jre8
         inputs.zen-browser.packages."${system}".default
+        piper
+        qbittorrent
+        adom
     ];
-
+    
     nix = {
         #package = pkgs.nix;
         settings.experimental-features = [ "nix-command" "flakes" ];
@@ -110,8 +107,14 @@
 
     programs.firefox.enable = true;
 
+    # programs.nixcord = {
+    #     enable = true;
+    # };
+    
+
     stylix.targets.spicetify.enable = false;
     stylix.targets.firefox.profileNames = [ "default"];
+    # stylix.targets.nixcord.enable = true;
     
     programs.spicetify =
         let
@@ -131,6 +134,7 @@
               ];
               theme = spicePkgs.themes.nightlight;
           };
+    
     
     xsession.windowManager.command = lib.mkForce "$@";
 }

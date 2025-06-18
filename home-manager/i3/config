@@ -86,7 +86,7 @@ bindsym $mod+Shift+p exec --no-startup-id "workspaces.sh move"
 bindsym $mod+Control+$left workspace prev
 bindsym $mod+Control+Left workspace prev
 
-set $i3lock-cmd i3lock -eti ~/Documents/lockscreen.png
+#set $i3lock-cmd i3lock -eti ~/Documents/lockscreen.png
 
 bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 

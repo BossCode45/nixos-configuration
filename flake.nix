@@ -2,13 +2,13 @@
     description = "My nixos configuration";
 
     inputs = {
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
         home-manager = {
-            url = "github:nix-community/home-manager/release-24.11";
+            url = "github:nix-community/home-manager/release-25.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
         stylix = {
-            url = "github:danth/stylix/release-24.11";
+            url = "github:danth/stylix/release-25.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
         spicetify-nix = {
@@ -17,8 +17,8 @@
         };
         YATwm = {
             #url = "git+https://git.tehbox.org/cgit/boss/YATwm.git";
-            url = "github:BossCode45/YATwm";
-            #url = "git+file:///home/boss/Documents/Coding/WM/YATwm";
+            #url = "github:BossCode45/YATwm";
+            url = "git+file:///home/boss/Documents/Coding/WM/YATwm";
             inputs.nixpkgs.follows = "nixpkgs";
         };
         # hyprland = {
@@ -41,6 +41,10 @@
             url = "github:MarceColl/zen-browser-flake";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        nixcord = {
+            url = "github:kaylorben/nixcord";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = inputs@{ nixpkgs, ... }: {
@@ -49,8 +53,10 @@
                 system = "x86_64-linux";
                 specialArgs = {inherit inputs;};
                 modules = [
+                    (import ./my-pkgs)
+                    
                     ./configuration.nix
-
+                    
                     inputs.home-manager.nixosModules.home-manager
                     {
                         home-manager.useGlobalPkgs = true;
