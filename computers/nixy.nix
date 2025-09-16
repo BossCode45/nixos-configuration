@@ -5,11 +5,11 @@
 { config, pkgs, inputs, ... }:
 {
     imports =
-	    [ # Include the results of the hardware scan.
-		    ../hardware-setups/tuf.nix
+	    [
             ../modules/nix.nix
             ../modules/nvidia.nix
             inputs.YATwm.nixosModules.default
+            inputs.sops.nixosModules.sops
             #inputs.spicetify-nix.nixosModules.default
 	    ];
     
@@ -31,28 +31,68 @@
     # networking.wireless.enable = true;	# Enables wireless support via wpa_supplicant.
     networking.networkmanager.enable = true;	# Easiest to use and most distros use this by default.
 
+    sops.defaultSopsFile = ../secrets/general.yaml;
+    sops.defaultSopsFormat = "yaml";
+    
+    sops.age.keyFile = "/home/boss/.config/sops/age/keys.txt";
+
+    sops.secrets = {
+        #"wg/nixnode/pub" = { };
+        "wg/nixy/priv" = {
+            restartUnits = [ "nm-file-secret-agent.service" ];
+            group = "networkmanager";
+            mode = "440";
+        };
+    };
+
     networking.firewall = {
         allowedUDPPorts = [ 51820 ];
     };
-    networking.wireguard.enable = false;
-    networking.wireguard.interfaces.wg0 = {
-        ips = [ "10.200.200.2/32" ];
-        listenPort = 51820;
-
-        privateKeyFile = "/home/boss/.wg/peer_A.key";
-
-        peers = [
+    networking.networkmanager.ensureProfiles = {
+        profiles = {
+            wg-nixnode = {
+                connection = {
+                    id = "wg-nixnode";
+                    autoconnect = "false";
+                    interface-name = "wg0";
+                    type = "wireguard";
+                };
+                ipv4 = {
+                    address1 = "10.100.0.2/32";
+                    may-fail = "false";
+                    method = "manual";
+                };
+                ipv6 = {
+                    method = "disabled";
+                };
+                wireguard = {
+                    listen-port = "51820";
+                    private-key-flags = 1;
+                    #private-key = "dummy";
+                };
+                proxy = { };
+                "wireguard-peer./6bWy02DhOSjaeXk+ol5ATgEYDDJvL+mTO9SCNvfIUQ=" = {
+                    allowed-ips = "0.0.0.0/0;";
+                    endpoint = "172.105.172.191:51820";
+                    persistent-keepalive = "25";
+                };
+            };
+        };
+        secrets.entries = [
             {
-                publicKey = "wQSg97FyVqWqkwMbmq1SLolf/MWlt9tIJuE5vKyDiRI=";
-
-                allowedIPs = [ "0.0.0.0/0" ];
-
-                endpoint = "139.144.99.248:51820";
-
-                persistentKeepalive = 25;
+                matchId = "wg-nixnode";
+                matchType = "wireguard";
+                matchSetting = "wireguard";
+                key = "private-key";
+                file = config.sops.secrets."wg/nixy/priv".path;
             }
         ];
     };
+
+    systemd.services."nm-file-secret-agent" = {
+        serviceConfig.User = "boss";
+    };
+    
 
     # Set your time zone.
     time.timeZone = "NZ";
@@ -167,6 +207,7 @@
 		    neofetch
             pinentry-gtk2
             git
+            nm-file-secret-agent
 	    ];
     documentation.dev.enable = true;
     

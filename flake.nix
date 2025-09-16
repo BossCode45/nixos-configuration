@@ -62,7 +62,8 @@
                 specialArgs = {inherit inputs;};
                 modules = [
                     (import ./my-pkgs)
-                    
+
+                    ./hardware-setups/tuf.nix
                     ./computers/nixy.nix
                     
                     inputs.home-manager.nixosModules.home-manager
@@ -81,7 +82,8 @@
                 system = "x86_64-linux";
                 specialArgs = {inherit inputs;};
                 modules = [
-                    ./computers/server.nix
+                    ./hardware-setups/linode.nix
+                    ./computers/nixnode.nix
                 ];
             };
         };
