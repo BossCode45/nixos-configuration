@@ -60,8 +60,11 @@ __prompt_command() {
             ls = "lsd";
             la = "lsd -a";
             ll = "lsd -al";
+            tree = "lsd --tree";
             pathfindsaver = "while sleep 1; do pathfind -f; done";
             qalc = "qalc -s 'varunits 0' -s 'angle 2'";
+
+            flake-rebuild = "nixos-rebuild switch --flake ~/nixos-configuration";
         };
     };
 

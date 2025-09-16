@@ -1,0 +1,9 @@
+keys:
+  - &nixy age1p3sw8q030a7zgawu4ccxm6sgsp88349nuxkd4kale0ruy9klypssdh7c9s
+  - &nixnode age1g7tzey3t2jmd79kaeukn89lgxg07tpq23w0u30lgq5z37xku0vwqcregzd
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+    - age:
+      - *nixy
+      - *nixnode

@@ -21,6 +21,10 @@
             url = "git+file:///home/boss/Documents/Coding/WM/YATwm";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        STK = {
+            url = "git+file:///home/boss/stk";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         # hyprland = {
         #     url = "github:hyprwm/Hyprland";
         #     inputs.nixpkgs.follows = "nixpkgs";
@@ -45,6 +49,10 @@
             url = "github:kaylorben/nixcord";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        sops = {
+            url = "github:Mic92/sops-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = inputs@{ nixpkgs, ... }: {
@@ -55,7 +63,7 @@
                 modules = [
                     (import ./my-pkgs)
                     
-                    ./configuration.nix
+                    ./computers/nixy.nix
                     
                     inputs.home-manager.nixosModules.home-manager
                     {
@@ -67,6 +75,13 @@
                     }
 
                     inputs.stylix.nixosModules.stylix
+                ];
+            };
+            nixos = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                specialArgs = {inherit inputs;};
+                modules = [
+                    ./computers/server.nix
                 ];
             };
         };

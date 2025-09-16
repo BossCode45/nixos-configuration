@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
     sourceRoot = "adom";
     installPhase = let desktopEntry = makeDesktopItem {
         name = "adom";
-        desktopName = "Adom";
+        desktopName = "ADOM";
         exec = "OUT_DIR/bin/adom";
         #path = "OUT_DIR/share";
     }; in ''

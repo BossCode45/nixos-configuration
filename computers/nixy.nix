@@ -3,28 +3,15 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, inputs, ... }:
-
-let
-    nvidia-offload = pkgs.writeShellScriptBin "prime-run" ''
-export __NV_PRIME_RENDER_OFFLOAD=1
-export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export __VK_LAYER_NV_optimus=NVIDIA_only
-exec "$@"
-'';
-in
 {
     imports =
 	    [ # Include the results of the hardware scan.
-		    ./hardware-configuration.nix
+		    ../hardware-setups/tuf.nix
+            ../modules/nix.nix
+            ../modules/nvidia.nix
             inputs.YATwm.nixosModules.default
             #inputs.spicetify-nix.nixosModules.default
 	    ];
-
-
-    nix.nixPath = [ "/etc/nix/path" ];
-    nix.registry.nixpkgs.flake = inputs.nixpkgs;
-    environment.etc."nix/path/nixpkgs".source = inputs.nixpkgs;
     
     # Use the systemd-boot EFI boot loader.
     boot = {
@@ -44,6 +31,29 @@ in
     # networking.wireless.enable = true;	# Enables wireless support via wpa_supplicant.
     networking.networkmanager.enable = true;	# Easiest to use and most distros use this by default.
 
+    networking.firewall = {
+        allowedUDPPorts = [ 51820 ];
+    };
+    networking.wireguard.enable = false;
+    networking.wireguard.interfaces.wg0 = {
+        ips = [ "10.200.200.2/32" ];
+        listenPort = 51820;
+
+        privateKeyFile = "/home/boss/.wg/peer_A.key";
+
+        peers = [
+            {
+                publicKey = "wQSg97FyVqWqkwMbmq1SLolf/MWlt9tIJuE5vKyDiRI=";
+
+                allowedIPs = [ "0.0.0.0/0" ];
+
+                endpoint = "139.144.99.248:51820";
+
+                persistentKeepalive = 25;
+            }
+        ];
+    };
+
     # Set your time zone.
     time.timeZone = "NZ";
 
@@ -59,22 +69,9 @@ in
 	    #useXkbConfig = true; # use xkbOptions in tty.
     };
 
-    nixpkgs.config.allowUnfree = true;
-    hardware.graphics.enable = true;
-    hardware.nvidia.modesetting.enable = true;
-    hardware.nvidia.open = true;
-    hardware.nvidia.prime = {
-	    offload.enable = true;
-
-	    nvidiaBusId = "PCI:1:0:0";
-	    intelBusId = "PCI:5:0:0";
-    };
-    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-
     # Enable the X11 windowing system.
     services.xserver = {
 	    enable = true;
-	    videoDrivers = [ "nvidia" ];
 
 	    desktopManager = {
 		    xterm.enable = false;
@@ -162,31 +159,8 @@ in
 
 	# List packages installed in system profile. To search, run:
 	# $ nix search wget
-    nix = {
-        settings = {
-            experimental-features = [ "nix-command" "flakes" ];
-            auto-optimise-store = true;
-            
-            trusted-users = [ "boss" ];
-
-            substituters = [
-                "https://cache.nixos.org"
-            ];
-
-            # trusted-public-keys = [
-            #     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-            # ];
-        };
-        gc = {
-            automatic = true;
-            dates = "weekly";
-            options = "--delete-older-than +5";
-        };
-        optimise.automatic = true;
-    };
 	environment.systemPackages = with pkgs;
 	    [
-		    nvidia-offload
 		    vim
 		    firefox
 		    pfetch
@@ -195,9 +169,8 @@ in
             git
 	    ];
     documentation.dev.enable = true;
-
+    
     hardware.graphics.enable32Bit = true;
-
     programs.steam = {
         enable = true;
         extraCompatPackages = with pkgs; [
@@ -232,7 +205,7 @@ in
         
         base16Scheme = "${pkgs.base16-schemes}/share/themes/material-palenight.yaml";
 
-        image = ./wallpaper.png;
+        image = ../wallpaper.png;
         targets.grub.useImage = true;
 
         opacity = {

@@ -94,6 +94,7 @@ bindsym $mod+x exec --no-startup-id "loginctl lock-session"
 bindsym $mod+Shift+x exec --no-startup-id "loginctl lock-session; systemctl suspend"
 # bindsym $mod+Shift+c exec --no-startup-id "~/.i3_commands/open-qb.sh"
 bindsym $mod+c exec --no-startup-id "firefox"
+bindsym $mod+Shift+c exec --no-startup-id "nyxt"
 bindsym $mod+Shift+minus exec --no-startup-id "emacsclient -c"
 
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5
@@ -120,7 +121,7 @@ floating_modifier $mod
 bindsym $mod+Return exec --no-startup-id kitty
 
 # Start emacs with vterm
-bindsym $mod+Shift+Return exec --no-startup-id "emacsclient -c --eval '(start-terminal)'"
+bindsym $mod+Shift+Return exec --no-startup-id "emacsclient -c --eval '(multi-vterm)'"
 
 # kill focused window
 bindsym $mod+Shift+q kill

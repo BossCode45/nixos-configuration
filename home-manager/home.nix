@@ -24,7 +24,7 @@
     home.packages = with pkgs; [
         feh
         pass
-        #spotify
+        spotify
         playerctl
         libqalculate
         libreoffice
@@ -40,7 +40,6 @@
         mumble
         gimp
         bottom
-        obs-studio
         xfce.thunar
         mpv
         man-pages
@@ -64,12 +63,16 @@
         wireguard-tools
         brightnessctl
         inputs.nil.packages.${system}.default
-        inputs.polymc.packages.${system}.default
+        #inputs.polymc.packages.${system}.default
         jre8
-        inputs.zen-browser.packages."${system}".default
+        #inputs.zen-browser.packages."${system}".default
         piper
         qbittorrent
-        adom
+        sbcl
+        superTuxKart
+        typst
+        sops
+        #adom
     ];
     
     nix = {
@@ -103,6 +106,22 @@
             };
         };
     };
+
+    programs.obs-studio = {
+        enable = true;
+
+        # optional Nvidia hardware acceleration
+        package = (
+            pkgs.obs-studio.override {
+                cudaSupport = true;
+            }
+        );
+
+        plugins = with pkgs.obs-studio-plugins; [
+            obs-pipewire-audio-capture
+            input-overlay
+        ];
+    };
     
 
     programs.firefox.enable = true;
@@ -121,7 +140,7 @@
             spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
         in
           {
-              enable = true;
+              enable = false;
               enabledExtensions = with spicePkgs.extensions; [
                   fullAppDisplay
                   powerBar
