@@ -55,14 +55,15 @@
         };
     };
 
-    outputs = inputs@{ nixpkgs, ... }: {
+    outputs = inputs@{self, nixpkgs, ... }: {
         nixosConfigurations = {
             nixy = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = {inherit inputs;};
                 modules = [
-                    (import ./my-pkgs)
-
+                    ./my-pkgs
+                    ./modules
+                    
                     ./hardware-setups/tuf.nix
                     ./computers/nixy.nix
                     
@@ -78,14 +79,18 @@
                     inputs.stylix.nixosModules.stylix
                 ];
             };
-            nixos = nixpkgs.lib.nixosSystem {
+            nixnode = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = {inherit inputs;};
                 modules = [
+                    ./modules
                     ./hardware-setups/linode.nix
                     ./computers/nixnode.nix
                 ];
             };
         };
+        
+        packages.x86_64-linux.teh-website = (nixpkgs.legacyPackages.x86_64-linux.callPackage ./website { });
     };
+
 }

@@ -1,29 +1,35 @@
-{ inputs, ... }:
+{ inputs, config, lib, ... }:
 {
-    nix.nixPath = [ "/etc/nix/path" ];
-    nix.registry.nixpkgs.flake = inputs.nixpkgs;
-    environment.etc."nix/path/nixpkgs".source = inputs.nixpkgs;
-    
-    nix = {
-        settings = {
-            experimental-features = [ "nix-command" "flakes" ];
-            auto-optimise-store = true;
-            
-            trusted-users = [ "boss" ];
+    options.teh-nix.nix = with lib; {
+        enable = mkEnableOption "Use the TehNix nix settings";
+    };
 
-            substituters = [
-                "https://cache.nixos.org"
-            ];
+    config = lib.mkIf config.teh-nix.nix.enable {
+        nix.nixPath = [ "/etc/nix/path" ];
+        nix.registry.nixpkgs.flake = inputs.nixpkgs;
+        environment.etc."nix/path/nixpkgs".source = inputs.nixpkgs;
+        
+        nix = {
+            settings = {
+                experimental-features = [ "nix-command" "flakes" ];
+                auto-optimise-store = true;
+                
+                trusted-users = [ "boss" ];
 
-            # trusted-public-keys = [
-            #     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-            # ];
+                substituters = [
+                    "https://cache.nixos.org"
+                ];
+
+                # trusted-public-keys = [
+                #     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                # ];
+            };
+            gc = {
+                automatic = true;
+                dates = "weekly";
+                options = "--delete-older-than +7";
+            };
+            optimise.automatic = true;
         };
-        gc = {
-            automatic = true;
-            dates = "weekly";
-            options = "--delete-older-than +7";
-        };
-        optimise.automatic = true;
     };
 }

@@ -7,10 +7,11 @@
 {
     imports =
         [ # Include the results of the hardware scan.
-            ../modules/nix.nix
             inputs.STK.nixosModules.default
             inputs.sops.nixosModules.sops
         ];
+
+    teh-nix.nix.enable = true;
 
     # Use the GRUB 2 boot loader.
     boot.loader.grub.enable = true;
@@ -20,7 +21,7 @@
     # Define on which hard drive you want to install Grub.
     # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-    networking.hostName = "nixos"; # Define your hostname.
+    networking.hostName = "nixnode"; # Define your hostname.
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -92,11 +93,18 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
         };
     };
 
-    services.httpd = {
+    # services.nginx = {
+    #     enable = true;
+    #     virtualHosts."172.105.172.191" = {
+    #         documentRoot = "${inputs.self.packages.x86_64-linux.teh-website}/srv/www";
+    #     };
+    # };
+
+    teh-nix.services.cgit = {
         enable = true;
-        virtualHosts."172.105.172.191" = {
-            documentRoot = "/srv/httpd";
-        };
+        authorizedKeys = config.users.users.boss.openssh.authorizedKeys.keys;
+        authorizedUsers = [ "boss" ];
+        domain = "172.105.172.191";
     };
     
     services.openssh = {
@@ -119,7 +127,7 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
 
     users.users.boss = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+        extraGroups = [ "wheel" "networkmanager"]; # Enable ‘sudo’ for the user.
         home = "/home/boss";
         openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJOukEKExoF6vr3vciQN8pBdd4FtZtRzqIGFJrUvllOY boss@nixy" ];
     };
@@ -131,6 +139,7 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
         mtr
         sysstat
         git
+        inputs.self.packages.x86_64-linux.teh-website
     ];
     
 

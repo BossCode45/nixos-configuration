@@ -6,12 +6,11 @@
 {
     imports =
 	    [
-            ../modules/nix.nix
-            ../modules/nvidia.nix
-            inputs.YATwm.nixosModules.default
             inputs.sops.nixosModules.sops
             #inputs.spicetify-nix.nixosModules.default
 	    ];
+
+    teh-nix.nix.enable = true;
     
     # Use the systemd-boot EFI boot loader.
     boot = {
@@ -109,56 +108,23 @@
 	    #useXkbConfig = true; # use xkbOptions in tty.
     };
 
-    # Enable the X11 windowing system.
-    services.xserver = {
-	    enable = true;
-
-	    desktopManager = {
-		    xterm.enable = false;
-            #default = "none";
-	    };
-        
-        deviceSection = ''
-                      Option "DRI" "2"
-                      Option "TearFree" "true"
-                      '';
-
-	    windowManager.i3 = {
-		    enable = true;
-		    package = pkgs.i3-gaps;
-	    };
-
-        windowManager.YATwm = {
-            enable = true;
-            package = inputs.YATwm.packages.x86_64-linux.YATwm;
-        };
-	};
-    programs.i3lock.enable = true;
+    teh-nix.xorg = {
+        enable = true;
+    };
+    
     programs.hyprland = {
         enable = true;
         #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         #portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
-    services.displayManager = {
-		#defaultSession = "none+i3";
-		sddm.enable = true;
-        #sddm.theme = "catppuccin-macchiato";
-        # ly.enable = true;
-	};
-	# services.xserver.displayManager = {
-    #     lightdm.enable = true;
-    # };
-
-	# Configure keymap in X11
-	services.xserver.xkb.layout = "us";
-	services.xserver.xkb.options = "caps:super";
-
 
     security.pam.services.swaylock = {};
 
 	# Enable CUPS to print documents.
 	services.printing.enable = true;
-    services.printing.drivers = [ pkgs.hplip ];
+    services.printing.drivers = with pkgs;[
+        hplip
+    ];
     services.avahi = {
         enable = true;
         nssmdns4 = true;
