@@ -133,7 +133,7 @@ bindsym $mod+Shift+d exec --no-startup-id "prime-run rofi -i -show drun -disable
 #bindsym $mod+d exec dmenu_run -i -nb '#303239' -nf '#f3f4f5' -sb  '#bf00f6' -sf '#f3f4f5'
 
 # Password menu
-bindsym $mod+g exec --no-startup-id "~/bin/rofi-passmenu"
+bindsym $mod+g exec --no-startup-id "rofi-passmenu"
 
 # i3 command runner
 bindsym $mod+Shift+semicolon exec --no-startup-id "i3-msg $(echo | rofi -l 0 -dmenu -p 'i3 command')"

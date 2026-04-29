@@ -74,6 +74,22 @@ in
             default = "git.example.com";
             description = "Domain to host it on";
         };
+        useACMEHost = mkOption {
+            type = types.str;
+            default = "";
+            description = "SSL cert to use if already aquired using security.acme.certs";
+        };
+        enableACME = mkEnableOption "Enable ACME with nginx";
+        onlySSL = mkOption {
+            type = types.bool;
+            default = false;
+            description = "Only allow ssl connections";
+        };
+        forceSSL = mkOption {
+            type = types.bool;
+            default = true;
+            description = "Force ssl connections";
+        };
         package = mkPackageOption pkgs "cgit" { };
         extraConfig = mkOption {
             type = types.str;
@@ -132,6 +148,10 @@ fastcgi_param HTTP_HOST $server_name;
 fastcgi_pass unix:${config.services.fcgiwrap.instances.cgit.socket.address};
         '';
             };
+            enableACME = cfg.enableACME;
+            forceSSL = cfg.forceSSL;
+        } // lib.optionalAttrs (cfg.useACMEHost != "") {
+            useACMEHost = "${cfg.useACMEHost}";
         };
     };
 }

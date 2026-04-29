@@ -24,7 +24,7 @@
     home.packages = with pkgs; [
         feh
         pass
-        spotify
+        # spotify
         playerctl
         libqalculate
         libreoffice
@@ -50,19 +50,27 @@
         #     plover-controller
         # ]))
         pavucontrol
-        unzip
+        unzip zip
         appimage-run
         lunar-client
         libnotify
         xclip
         (python3.withPackages (ps: with ps; [
             python-lsp-server
+            numpy
+            matplotlib
+            jupyter
+            jupytext
+            pandas
+            pydot
         ]))
+        graphviz
         alacritty
         nyxt
         wireguard-tools
         brightnessctl
-        inputs.nil.packages.${system}.default
+        # inputs.nil.packages.${system}.default
+        nil
         #inputs.polymc.packages.${system}.default
         jre8
         #inputs.zen-browser.packages."${system}".default
@@ -72,7 +80,12 @@
         superTuxKart
         typst
         sops
+        ffmpeg
+        ghc
+        # hytale-launcher
+        # inputs.hytale-launcher.packages.${pkgs.system}.default
         #adom
+        flatpak
     ];
     
     nix = {
@@ -122,6 +135,8 @@
             input-overlay
         ];
     };
+
+    # services.easyeffects.enable = true;
     
 
     programs.firefox.enable = true;
@@ -131,7 +146,7 @@
     # };
     
 
-    stylix.targets.spicetify.enable = false;
+    stylix.targets.spicetify.enable = true;
     stylix.targets.firefox.profileNames = [ "default"];
     # stylix.targets.nixcord.enable = true;
     
@@ -140,18 +155,19 @@
             spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
         in
           {
-              enable = false;
+              enable = true;
               enabledExtensions = with spicePkgs.extensions; [
                   fullAppDisplay
                   powerBar
-                  addToQueueTop
+                  # addToQueueTop
+                  loopyLoop
               ];
               enabledCustomApps = with spicePkgs.apps; [
                   newReleases
                   lyricsPlus
                   betterLibrary
               ];
-              theme = spicePkgs.themes.nightlight;
+              # theme = spicePkgs.themes.nightlight;
           };
     
     

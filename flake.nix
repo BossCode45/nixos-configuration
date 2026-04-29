@@ -2,13 +2,13 @@
     description = "My nixos configuration";
 
     inputs = {
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
         home-manager = {
-            url = "github:nix-community/home-manager/release-25.05";
+            url = "github:nix-community/home-manager/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
         };
         stylix = {
-            url = "github:danth/stylix/release-25.05";
+            url = "github:danth/stylix/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
         };
         spicetify-nix = {
@@ -16,7 +16,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         YATwm = {
-            #url = "git+https://git.tehbox.org/cgit/boss/YATwm.git";
+            #url = "git+https://git.tehbox.org/boss/YATwm.git";
             #url = "github:BossCode45/YATwm";
             url = "git+file:///home/boss/Documents/Coding/WM/YATwm";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -53,6 +53,10 @@
             url = "github:Mic92/sops-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+    #     hytale-launcher = {
+    #         url = "github:TNAZEP/HytaleLauncherFlake";
+    #         inputs.nixpkgs.follows = "nixpkgs";
+    #     };
     };
 
     outputs = inputs@{self, nixpkgs, ... }: {
@@ -91,6 +95,7 @@
         };
         
         packages.x86_64-linux.teh-website = (nixpkgs.legacyPackages.x86_64-linux.callPackage ./website { });
+        packages.x86_64-linux.stk-installers = (nixpkgs.legacyPackages.x86_64-linux.callPackage ./my-pkgs/stk-installers.nix { });
     };
 
 }

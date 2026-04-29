@@ -8,6 +8,6 @@
         recursive = true;
     };
     home.packages = [
-        pkgs.rofi-wayland
+        pkgs.rofi
     ];
 }

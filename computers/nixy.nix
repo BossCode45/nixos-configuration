@@ -113,7 +113,7 @@
     };
     
     programs.hyprland = {
-        enable = true;
+        enable = false;
         #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         #portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
@@ -133,13 +133,12 @@
 
 	# Enable sound.
 	#sound.enable = true;
-	services.pipewire =
-	    {
-		    enable = true;
-		    alsa.enable = false;
-		    alsa.support32Bit = false;
-		    pulse.enable = true;
-	    };
+	services.pipewire = {
+		enable = true;
+		alsa.enable = false;
+		alsa.support32Bit = false;
+		pulse.enable = true;
+	};
 
     services.upower.enable = true;
 
@@ -180,6 +179,15 @@
     hardware.graphics.enable32Bit = true;
     programs.steam = {
         enable = true;
+        package = pkgs.steam.override {
+            extraEnv = {
+                __NV_PRIME_RENDER_OFFLOAD=1;
+                __NV_PRIME_RENDER_OFFLOAD_PROVIDER="NVIDIA-G0";
+                __GLX_VENDOR_LIBRARY_NAME="nvidia";
+                __VK_LAYER_NV_optimus="NVIDIA_only";
+            };
+        };
+
         extraCompatPackages = with pkgs; [
             proton-ge-bin
         ];
@@ -204,8 +212,13 @@
         "f /var/lib/systemd/linger/boss" # enables lingering
     ];
 
+    # programs.dconf.enable = true;
+
     
     services.ratbagd.enable = true;
+
+    # xdg.portal.enable = true;
+    # services.flatpak.enable = true;
 
     stylix = {
         enable = true;
@@ -213,7 +226,7 @@
         base16Scheme = "${pkgs.base16-schemes}/share/themes/material-palenight.yaml";
 
         image = ../wallpaper.png;
-        targets.grub.useImage = true;
+        targets.grub.useWallpaper = true;
 
         opacity = {
             terminal = 0.8;
@@ -238,7 +251,7 @@
             };
 
             emoji = {
-                package = pkgs.noto-fonts-emoji;
+                package = pkgs.noto-fonts-color-emoji;
                 name = "Noto Color Emoji";
             };
             

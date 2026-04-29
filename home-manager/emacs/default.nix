@@ -3,8 +3,10 @@ let
     tex = (pkgs.texlive.combine {
         inherit (pkgs.texlive) scheme-medium
             dvisvgm dvipng # for preview and export as html
+            # svg transparent
             etoolbox
             subfiles
+            enumitem
             wrapfig amsmath ulem hyperref capt-of;
     });
     myEmacs = (pkgs.emacsPackagesFor pkgs.emacs30).emacsWithPackages (epkgs: with epkgs; [
@@ -23,9 +25,10 @@ in
         emacsPackages.mu4e
         isync
         ispell
-        poppler_utils
+        poppler-utils
         tex
         ghostscript
+        haskell-language-server
         myEmacs
     ];
 }

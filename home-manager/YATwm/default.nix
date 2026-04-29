@@ -1,6 +1,7 @@
 {
     pkgs,
     inputs,
+    lib,
     ...
 } : {
     imports = [
@@ -32,6 +33,11 @@
             right = "l";
             up = "k";
             down = "j";
+            wsBind = key: ws: {
+                "s-${key}" = "changeWS ${ws}";
+                "s-S-${key}" = "wToWS ${ws}";
+            };
+            wsBinds = workspaces: lib.attrsets.concatMapAttrs (key: ws: wsBind key ws) workspaces;
         in {
             # Important
             "s-E" = "exit";
@@ -63,32 +69,22 @@
             # Sound
             "s-[" = "spawn playerctl -p firefox play-pause";
             "s-]" = "spawn playerctl -p spotify play-pause";
-
-            # Workspaces
-            "s-1" = "changeWS 1";
-            "s-S-1" = "wToWS 1";
-            "s-2" = "changeWS 2";
-            "s-S-2" = "wToWS 2";
-            "s-3" = "changeWS 3";
-            "s-S-3" = "wToWS 3";
-            "s-4" = "changeWS 4";
-            "s-S-4" = "wToWS 4";
-            "s-5" = "changeWS 5";
-            "s-S-5" = "wToWS 5";
-            "s-6" = "changeWS 6";
-            "s-S-6" = "wToWS 6";
-            "s-7" = "changeWS 7";
-            "s-S-7" = "wToWS 7";
-            "s-8" = "changeWS 8";
-            "s-S-8" = "wToWS 8";
-            "s-9" = "changeWS 9";
-            "s-S-9" = "wToWS 9";
-            "s-0" = "changeWS 10";
-            "s-S-0" = "wToWS 10";
             
             # Special workspaces
             "s-p s" = "changeWS 11";
             "s-S-p s" = "wToWS 11";
+        } //
+        wsBinds {
+            "1" = "1";
+            "2" = "2";
+            "3" = "3";
+            "4" = "4";
+            "5" = "5";
+            "6" = "6";
+            "7" = "7";
+            "8" = "8";
+            "9" = "9";
+            "0" = "10";
         };
         workspaces = [
             {name = "1: A";}

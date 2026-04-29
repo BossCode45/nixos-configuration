@@ -17,9 +17,12 @@ in
         nixpkgs.config.allowUnfree = true;
         hardware.graphics.enable = true;
         hardware.nvidia.modesetting.enable = true;
+        # hardware.nvidia.dynamicBoost.enable = true;
         hardware.nvidia.open = true;
         hardware.nvidia.prime = {
+            # sync.enable = true;
 	        offload.enable = true;
+            # offload.offloadCmdMainProgram = "prime-run";
 
 	        nvidiaBusId = "PCI:1:0:0";
 	        intelBusId = "PCI:5:0:0";

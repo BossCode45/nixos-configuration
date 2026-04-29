@@ -21,12 +21,12 @@
     xsession.enable = true;
     xsession.windowManager.i3 = {
         enable = true;
-        package = pkgs.i3-gaps;
+        package = pkgs.i3;
     };
     xdg.configFile."i3/config".enable = false;
     home.file.".config/i3/config" = {
         source = ./config;
-        onChange = "${pkgs.i3-gaps}/bin/i3-msg restart";
+        onChange = "${pkgs.i3}/bin/i3-msg restart";
     };
     home.packages = with pkgs; [
 		i3lock
