@@ -9,6 +9,7 @@
         ./kitty
         inputs.spicetify-nix.homeManagerModules.default
         inputs.nixcord.homeModules.nixcord
+        inputs.zen-browser.homeModules.twilight-official
         #inputs.stylix.homeManagerModules.stylix
     ];
 
@@ -28,6 +29,8 @@
         playerctl
         libqalculate
         libreoffice
+        hunspell
+        hunspellDicts.en_AU
         logisim-evolution
         thunderbird
         xdotool
@@ -63,10 +66,13 @@
             jupytext
             pandas
             pydot
+            scikit-learn
+            nbdev
+            pillow
         ]))
         graphviz
         alacritty
-        nyxt
+        # nyxt
         wireguard-tools
         brightnessctl
         # inputs.nil.packages.${system}.default
@@ -76,7 +82,7 @@
         #inputs.zen-browser.packages."${system}".default
         piper
         qbittorrent
-        sbcl
+        # sbcl
         superTuxKart
         typst
         sops
@@ -86,6 +92,7 @@
         # inputs.hytale-launcher.packages.${pkgs.system}.default
         #adom
         flatpak
+        # openttd
     ];
     
     nix = {
@@ -139,7 +146,13 @@
     # services.easyeffects.enable = true;
     
 
-    programs.firefox.enable = true;
+    programs.firefox = {
+        enable = true;
+    };
+    programs.zen-browser = {
+        enable = true;
+        setAsDefaultBrowser = true;
+    };
 
     # programs.nixcord = {
     #     enable = true;
@@ -148,6 +161,7 @@
 
     stylix.targets.spicetify.enable = true;
     stylix.targets.firefox.profileNames = [ "default"];
+    stylix.targets.zen-browser.profileNames = [ "default" ];
     # stylix.targets.nixcord.enable = true;
     
     programs.spicetify =

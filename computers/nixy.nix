@@ -169,7 +169,7 @@
 		    vim
 		    firefox
 		    pfetch
-		    neofetch
+		    fastfetch
             pinentry-gtk2
             git
             nm-file-secret-agent

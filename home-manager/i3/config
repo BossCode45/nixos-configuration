@@ -93,7 +93,7 @@ bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 bindsym $mod+x exec --no-startup-id "loginctl lock-session"
 bindsym $mod+Shift+x exec --no-startup-id "loginctl lock-session; systemctl suspend"
 # bindsym $mod+Shift+c exec --no-startup-id "~/.i3_commands/open-qb.sh"
-bindsym $mod+c exec --no-startup-id "firefox"
+bindsym $mod+c exec --no-startup-id "zen-twilight"
 bindsym $mod+Shift+c exec --no-startup-id "nyxt"
 bindsym $mod+Shift+minus exec --no-startup-id "emacsclient -c"
 
@@ -105,7 +105,7 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindxym XF86AudioStop exec --no-startup-id playerctl stop
 
-bindsym $mod+bracketleft exec --no-startup-id playerctl -p firefox play-pause
+bindsym $mod+bracketleft exec --no-startup-id playerctl -p zen-twilight play-pause
 bindsym $mod+bracketright exec --no-startup-id playerctl -p spotify play-pause
 
 #Emoji picker

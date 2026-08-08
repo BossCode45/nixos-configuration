@@ -201,7 +201,7 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
             track-voting = false;
             voting-timeout = 15;
 	        private-server-password = "lug@uoa";
-            motd = "Server for LUG@UoA\nChampionship coming now!";
+            motd = "Server for LUG@UoA\nChampionship coming soon!";
             live-spectate = true;
             server-configurable = true;
         };
