@@ -11,7 +11,7 @@ in
         ./emacs
         #./hyprland
         ./i3
-        ./YATwm
+        # ./YATwm
         ./kitty
         inputs.spicetify-nix.homeManagerModules.default
         inputs.nixcord.homeModules.nixcord

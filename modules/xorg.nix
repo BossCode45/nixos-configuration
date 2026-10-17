@@ -2,7 +2,7 @@
 {
     imports = [
         ./nvidia.nix
-        inputs.YATwm.nixosModules.YATwm
+        # inputs.YATwm.nixosModules.YATwm
     ];
     
     options.teh-nix.xorg = with lib; {
@@ -36,10 +36,10 @@
 		        package = pkgs.i3;
 	        };
 
-            windowManager.YATwm = {
-                enable = true;
-                package = inputs.YATwm.packages.x86_64-linux.YATwm;
-            };
+            # windowManager.YATwm = {
+            #     enable = true;
+            #     package = inputs.YATwm.packages.x86_64-linux.YATwm;
+            # };
 	    };
         programs.i3lock.enable = true;
 

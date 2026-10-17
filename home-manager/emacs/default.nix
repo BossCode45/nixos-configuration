@@ -11,7 +11,7 @@ let
     });
     myEmacs = (pkgs.emacsPackagesFor pkgs.emacs30).emacsWithPackages (epkgs: with epkgs; [
         # vterm
-        ghostel
+        # ghostel
         treesit-grammars.with-all-grammars
     ]);
 in

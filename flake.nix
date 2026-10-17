@@ -15,12 +15,12 @@
             url = "github:Gerg-L/spicetify-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        YATwm = {
-            #url = "git+https://git.tehbox.org/boss/YATwm.git";
-            #url = "github:BossCode45/YATwm";
-            url = "git+file:///home/boss/Documents/Coding/WM/YATwm";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        # YATwm = {
+        #     #url = "git+https://git.tehbox.org/boss/YATwm.git";
+        #     url = "github:BossCode45/YATwm";
+        #     # url = "git+file:///home/boss/Documents/Coding/WM/YATwm";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
         STK = {
             url = "git+file:///home/boss/stk";
             inputs.nixpkgs.follows = "nixpkgs";
