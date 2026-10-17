@@ -38,38 +38,61 @@ There are no tests or linter. "Does it evaluate/build" is the check. `nil` is in
 
 ## Gotchas
 
-- **Flakes only see git-tracked files.** You must `git add` a new file before a rebuild can see it. This matters even more for `modules/`, which auto-imports files (see below).
-- **`flake.lock` is gitignored**, so inputs aren't pinned in the repo.
-- The **`YATwm` and `STK` inputs are `git+file://` paths** on this machine (`~/Documents/Coding/WM/YATwm`, `~/stk`). Evaluating either host needs them present. `nixnode` is always built from `nixy` and then pushed.
+- **Flakes only see git-tracked files.** You must `git add` a new file before a rebuild can see it. This matters even more here, because `modules/` is auto-imported by import-tree (see below).
+- **`flake.lock` is tracked.** Run `nix flake lock` after adding an input.
+- The **`STK` input is a `git+file://` path** (`~/stk`), and evaluating the flake needs it present. The `YATwm` input (`~/Documents/Coding/WM/YATwm`) is currently commented out; `homeManager.YATwm` references it lazily, so that's fine as long as nothing imports that module. `nixnode` is always built from `nixy` and then pushed.
 - Indentation is **4 spaces**. Multi-line `''` strings (shell scripts, configs) usually start at column 0 rather than following the Nix indentation. Match that.
 - Leave `system.stateVersion` and `home.stateVersion` alone.
 
 ## Architecture
 
-### Flake wiring (`flake.nix`)
-Each host is assembled as `./modules` + `./hardware-setups/<hw>.nix` + `./computers/<host>.nix`. `nixy` also gets `./my-pkgs`, the home-manager NixOS module, and stylix. `inputs` is passed to every NixOS and home-manager module through `specialArgs`/`extraSpecialArgs`, so third-party modules are imported inline, e.g. `inputs.sops.nixosModules.sops`.
+### Dendritic pattern (flake-parts + import-tree)
+`flake.nix` only declares inputs and runs `inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules)`. **Every `.nix` file under `modules/` is a flake-parts module** and is auto-imported. A file whose name has a path component starting with `_` is skipped. Each file exports exactly one thing:
+- NixOS modules: `flake.modules.nixos.<name>`
+- home-manager modules: `flake.modules.homeManager.<name>`
+- packages: `perSystem.packages.<name> = pkgs.callPackage (<fn>) { };`
+- hosts: `flake.nixosConfigurations.<host>`
 
-### `modules/`: custom option modules under the `teh-nix.*` namespace
-`modules/default.nix` **auto-imports every `.nix` file in the directory recursively**, except `default.nix`. Both hosts import all of them, so each module has to be gated behind `lib.mkIf config.teh-nix.<name>.enable`, and a host turns on only what it needs:
+The original module goes inside, wrapped like this:
+```nix
+{ inputs, config, ... }:
+let
+    nixos = config.flake.modules.nixos;
+    hm = config.flake.modules.homeManager;
+in
+{
+    flake.modules.nixos.<name> =
+        { config, lib, pkgs, ... }:
+        { ... };
+}
+```
+**There are no `specialArgs`.** Inner modules use the outer-captured `inputs`, so `inputs` must never be added back to an inner argument list. Modules import each other by reference (`hm.polybar`, `nixos.teh-nix`), not by relative path. Relative paths are only for asset files that sit next to the module, such as `./config` and `./scripts`. Paths to the repo-root `secrets/` and `wallpaper.png` are `../../`.
+
+`modules/flake-parts.nix` imports `flake-parts.flakeModules.modules` and sets `systems`. `modules/deploy.nix` holds `flake.deploy.nodes.nixnode` and the deploy-rs `checks`.
+
+### `modules/teh-nix/`: custom option modules under the `teh-nix.*` namespace
+All four files define **`flake.modules.nixos.teh-nix`**. These deferred modules merge into one module, and both hosts import it, so each feature has to be gated behind `lib.mkIf config.teh-nix.<name>.enable`. A host turns on only what it needs:
 - `teh-nix.nix`: nix settings, flakes, the registry/NIX_PATH pointing at the flake's nixpkgs, and `nh` cleanup (in place of `nix.gc`).
-- `teh-nix.xorg`: X server, and pulls in the YATwm NixOS module. It enables `teh-nix.nvidia` by default.
+- `teh-nix.xorg`: X server, with a YATwm NixOS module hook (commented out). It enables `teh-nix.nvidia` by default.
 - `teh-nix.nvidia`: PRIME offload with bus IDs, plus the `prime-run` wrapper.
 - `teh-nix.services.cgit`: self-written cgit + nginx + git-over-ssh service, used on nixnode.
 
 Add new reusable functionality here in the same `options`/`config = mkIf` pattern instead of putting it straight into a host file.
 
-### `computers/`: per-host config
-These are the old `configuration.nix` equivalents. They set the `teh-nix.*` toggles, sops secrets, networking, and the services for the host. The wireguard tunnel spans both files: `nixnode` is the hub (`10.100.0.1`, kernel wireguard), and `nixy` is the peer (`10.100.0.2`, a NetworkManager profile that gets its key from sops through `nm-file-secret-agent`).
+### `modules/computers/`: per-host config
+Each file defines both `flake.modules.nixos.<host>` and `flake.nixosConfigurations.<host>`. These are the old `configuration.nix` equivalents, and their `imports` do the host assembly: `nixos.teh-nix`, the hardware module (`nixos.tuf` / `nixos.linode` from `modules/hardware-setups/`), and the `inputs.*` modules. `nixy` additionally imports `nixos.my-pkgs`, home-manager (`home-manager.users.boss = hm.boss`) and stylix. Host files set the `teh-nix.*` toggles, sops secrets, networking and the host's services. The wireguard tunnel spans both files: `nixnode` is the hub (`10.100.0.1`, kernel wireguard), and `nixy` is the peer (`10.100.0.2`, a NetworkManager profile that gets its key from sops through `nm-file-secret-agent`).
 
-### `home-manager/`: user `boss` on nixy
-`home.nix` is the entry point and imports one directory per program (each has a `default.nix`; some ship raw dotfiles next to it, such as `i3/config`, `polybar/config.ini`, `waybar/config/`). Commented-out imports, like `hyprland`, are kept for switching back. Both `i3` and `YATwm` are imported, and `xsession.windowManager.command` is `mkForce`d to `"$@"` so the display manager decides which WM starts. Colors and fonts come from **stylix**, configured in `computers/nixy.nix`, so don't hardcode colors in program configs that stylix targets.
+### `modules/home-manager/`: user `boss` on nixy
+`home.nix` exports `homeManager.boss`, the entry point. There is one directory per program, each with a `default.nix` exporting `homeManager.<dir>`; some ship raw dotfiles next to it, such as `i3/config`, `polybar/config.ini` and `waybar/config/`. `shells/bash.nix` exports `homeManager.bash`. Commented-out imports, like `hm.hyprland`, are kept for switching back. `xsession.windowManager.command` is `mkForce`d to `"$@"` so the display manager decides which WM starts. Colors and fonts come from **stylix**, configured in `computers/nixy.nix`, so don't hardcode colors in program configs that stylix targets.
 
-`claude-code` is pinned by overriding the nixpkgs package with a vendored manifest (`home-manager/claude-code-manifest-<version>.json`). To bump it, add the new manifest and update the filename in `home.nix`.
+`i3/i3-commands.nix` and `i3/rofi-passmenu.nix` are flake packages, and the i3 module uses them through `inputs.self.packages.${pkgs.stdenv.hostPlatform.system}`.
 
-### `my-pkgs/`
-`default.nix` is a NixOS module that adds an overlay (it currently provides `adom`). `stk-installers.nix` isn't part of the overlay: it's exposed directly as a flake package and served (currently commented out) from nixnode.
+`claude-code` is pinned by overriding the nixpkgs package with a vendored manifest (`modules/home-manager/claude-code-manifest-<version>.json`). To bump it, add the new manifest and update the filename in `home.nix`.
 
-### `website/`
+### `modules/my-pkgs/`
+`adom.nix` and `stk-installers.nix` are flake packages. `default.nix` exports `nixos.my-pkgs`, an overlay that exposes `inputs.self.packages.<system>.adom` as `pkgs.adom`. `stk-installers` is served (currently commented out) from nixnode.
+
+### `modules/website/`
 A static site: it copies `src/` into `$out/srv/www`. It's built as the flake package `teh-website`, and the `tehbox.org` vhost references it through `inputs.self.packages`.
 
 ### Secrets (sops-nix)
