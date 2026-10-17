@@ -1,14 +1,14 @@
 { ... }:
 {
-    flake.modules.homeManager.hyprpaper =
-        {
-            pkgs,
-            ...
-        }:
-        {
-            #home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
-            home.packages = with pkgs; [
-                hyprpaper
-            ];  
-        };
+	flake.modules.homeManager.hyprpaper =
+		{
+			pkgs,
+			...
+		}:
+		{
+			#home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+			home.packages = with pkgs; [
+				hyprpaper
+			];
+		};
 }
