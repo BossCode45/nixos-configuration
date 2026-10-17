@@ -24,12 +24,18 @@
                 #     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
                 # ];
             };
-            gc = {
-                automatic = true;
-                dates = "weekly";
-                options = "--delete-older-than +7";
-            };
             optimise.automatic = true;
+        };
+
+        # nh's cleaner replaces nix.gc (the nh module asserts they aren't both on)
+        programs.nh = {
+            enable = true;
+            clean = {
+                enable = true;
+                dates = "weekly";
+                # --no-direnv keeps nix-direnv's gcroots so dev shells survive
+                extraArgs = "--keep-since 7d --keep 5 --no-direnv";
+            };
         };
     };
 }

@@ -11,6 +11,40 @@
 	    ];
 
     teh-nix.nix.enable = true;
+    programs.nix-ld.enable = true;
+    programs.nix-ld.libraries = with pkgs; [
+        # stdenv.cc.cc
+        glib
+        glibc
+        nspr
+        nss
+        dbus
+        atk
+        cups
+        cairo
+        gtk3
+        alsa-lib
+        expat
+        fontconfig
+        freetype
+        libgbm
+        libnotify
+        libsecret
+        libxkbcommon
+        mesa
+        pango
+        libX11
+        libXcomposite
+        libXcursor
+        libXdamage
+        libXext
+        libXfixes
+        libXi
+        libXrandr
+        libXrender
+        libXtst
+        libxcb
+    ];
     
     # Use the systemd-boot EFI boot loader.
     boot = {
@@ -46,6 +80,7 @@
 
     networking.firewall = {
         allowedUDPPorts = [ 51820 ];
+        allowedTCPPorts = [ 8081 ];
     };
     networking.networkmanager.ensureProfiles = {
         profiles = {

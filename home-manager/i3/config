@@ -47,7 +47,7 @@ set $left h
 set $right l
 
 ##STARTUP
-#exec_always --no-startup-id "feh --bg-scale ~/Wallpapers/val.png"
+exec_always --no-startup-id "feh --bg-scale ~/Wallpapers/val.png"
 #exec_always --no-startup-id nitrogen --restore
 #exec_always --no-startup-id "picom --backend glx -fD 3 --vsync"
 exec_always --no-startup-id "~/.config/polybar/launch.sh"
@@ -105,7 +105,7 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindxym XF86AudioStop exec --no-startup-id playerctl stop
 
-bindsym $mod+bracketleft exec --no-startup-id playerctl -p zen-twilight play-pause
+bindsym $mod+bracketleft exec --no-startup-id playerctl -p firefox play-pause
 bindsym $mod+bracketright exec --no-startup-id playerctl -p spotify play-pause
 
 #Emoji picker

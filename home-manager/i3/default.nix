@@ -37,5 +37,6 @@
 		nitrogen
         pamixer
         (pkgs.callPackage ./i3-commands.nix { })
+        (pkgs.callPackage ./rofi-passmenu.nix { })
     ];
 }

@@ -9,10 +9,8 @@
         [
             inputs.STK.nixosModules.default
             inputs.sops.nixosModules.sops
-            (builtins.fetchTarball {
-                url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
-                sha256 = "0f1mq2gdmx9wd0k89f6w61sbfzpd1wwz857l2xvyp1x0msmd2z20";
-            })
+            inputs.nixos-mailserver.nixosModules.default
+            inputs.neodrive-website.nixosModules.default
         ];
 
     teh-nix.nix.enable = true;
@@ -63,6 +61,10 @@
             mode = "440";
         };
         "mail/boss" = { };
+        "nginx/dashboard-htpasswd" = {
+            owner = "nginx";
+            mode = "400";
+        };
     };
 
     networking.firewall = {
@@ -121,6 +123,15 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
 
     services.nginx = {
         enable = true;
+        # Log the vhost at the start of each line ("vcombined") so goaccess
+        # can split traffic by subdomain
+        commonHttpConfig = ''
+log_format vcombined '$host:$server_port $remote_addr - $remote_user [$time_local] '
+                     '"$request" $status $body_bytes_sent '
+                     '"$http_referer" "$http_user_agent"';
+access_log /var/log/nginx/access.log vcombined;
+'';
+        # virtualHosts.${config.mailserver.fqdn}.enableACME = true;
         virtualHosts = {
             "tehbox.org" = {
                 root = "${inputs.self.packages.x86_64-linux.teh-website}/srv/www";
@@ -133,15 +144,49 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
                 enableACME = true;
                 forceSSL = true;
             };
-            "stk.lug.ac" = {
-                root = "${inputs.self.packages.x86_64-linux.stk-installers}/srv/www";
+            # "stk.lug.ac" = {
+            #     root = "${inputs.self.packages.x86_64-linux.stk-installers}/srv/www";
+            #     enableACME = true;
+            #     forceSSL = true;
+            #     locations."/".extraConfig = "autoindex on;\n";
+            # };
+            "dashboard.tehbox.org" = {
+                root = "/var/lib/goaccess/html";
+                basicAuthFile = config.sops.secrets."nginx/dashboard-htpasswd".path;
                 enableACME = true;
                 forceSSL = true;
-                locations."/".extraConfig = "autoindex on;\n";
             };
             "_" = {
                 globalRedirect = "tehbox.org";
             };
+        };
+    };
+
+    # Web traffic dashboard, rebuilt from the nginx access log every 10 minutes.
+    # --persist/--restore keep the totals in /var/lib/goaccess/db across log rotations.
+    systemd.services.goaccess-report = {
+        description = "Build goaccess report for dashboard.tehbox.org";
+        serviceConfig = {
+            Type = "oneshot";
+            User = "nginx";
+            Group = "nginx";
+            StateDirectory = [ "goaccess" "goaccess/db" "goaccess/html" ];
+        };
+        script = ''
+${pkgs.goaccess}/bin/goaccess /var/log/nginx/access.log \
+  --log-format=VCOMBINED \
+  --num-tests=0 \
+  --no-query-string \
+  --persist --restore --db-path=/var/lib/goaccess/db \
+  --html-report-title="tehbox.org traffic" \
+  -o /var/lib/goaccess/html/index.html
+'';
+    };
+    systemd.timers.goaccess-report = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+            OnCalendar = "*:0/10";
+            Persistent = true;
         };
     };
 
@@ -154,6 +199,11 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
         # useACMEHost = "tehbox.org";
         forceSSL = true;
         # onlySSL = true;
+    };
+
+    services.neodrive-website = {
+            enable = true;
+            domain = "neodrive.tehbox.org";
     };
 
     services.znc = {
@@ -212,6 +262,8 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
         stateVersion = 3;
         fqdn = "tehbox.org";
         domains = [ "tehbox.org" ];
+        
+        x509.useACMEHost = config.mailserver.fqdn;
 
         loginAccounts = {
             "boss@tehbox.org" = {
@@ -220,7 +272,7 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
             };
         };
         
-        certificateScheme = "acme";
+        # certificateScheme = "acme";
     };
 
     users.users.boss = {
@@ -239,8 +291,9 @@ ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j 
         mtr
         sysstat
         git
+        goaccess
         inputs.self.packages.x86_64-linux.teh-website
-        inputs.self.packages.x86_64-linux.stk-installers
+        # inputs.self.packages.x86_64-linux.stk-installers
     ];
     
 

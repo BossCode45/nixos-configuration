@@ -10,7 +10,8 @@ let
             wrapfig amsmath ulem hyperref capt-of;
     });
     myEmacs = (pkgs.emacsPackagesFor pkgs.emacs30).emacsWithPackages (epkgs: with epkgs; [
-        vterm
+        # vterm
+        ghostel
         treesit-grammars.with-all-grammars
     ]);
 in
