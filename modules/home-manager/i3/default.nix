@@ -4,14 +4,6 @@ let
 in
 {
 	flake.modules.homeManager.i3 =
-		# let
-		#   nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-24.11";
-		#   pkgs = import nixpkgs { config = {}; overlays = []; };
-		# in
-		# {
-		#   i3-commands = pkgs.callPackage ./i3-commands.nix { };
-		# }
-
 		{
 			config,
 			pkgs,

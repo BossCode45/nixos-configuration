@@ -235,7 +235,7 @@ in
 				useLegacyConfig = false;
 				openFirewall = true;
 				config = {
-					SSLCertFile = "/var/lib/acme/tehbox.org/key.pem";
+					SSLCertFile = "/var/lib/acme/tehbox.org/full.pem";
 					LoadModule = [ "webadmin" ];
 					User.boss = {
 						Admin = true;

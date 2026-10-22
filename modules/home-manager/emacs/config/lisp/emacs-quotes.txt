@@ -1,0 +1,523 @@
+[1] I don't think anyone is claiming this is an innovation, merely a syntactic atrocity
+
+[2] dynamic languages are static languages where someone's spamming the "just shut up and compile" button on the compiler
+
+[3] y'know, if you took the vi out of it, evil would be nothing more than el
+
+[4] dash was created in a fit of rage upon learning that filter in Common Lisp was named remove-if-not
+
+[5] so, I'm not completely sure what the function I'm writing does / I'm using examples though, so I think I'm close
+
+[6] if you are not competent, and you cannot hire someone competent, you should not be on the network
+
+[7] I dunno what FSF is, but that OS is completely free
+
+[8] if your users can't turn on the lights even after you tell them to use the switch, and draw a picture of the switch, then they have to work in the dark
+
+[9] do you just adopt whatever language had the last press release
+
+[10] The dialect of PHP we use is pretty nice
+
+[11] C++ is basically php with types
+
+[12] java got linked to the web as securely as saddam hussein got linked to 9/11 for the war
+
+[13] Doesn't seem to hard to implement a WYSIWYG Word processor, I just don't see enough interest for it to actually have the work put in
+
+[14] I haven't quite fully adopted the minimalistic philosophy of the emacser
+
+[15] bzr is slow compared to glaciers
+
+[16] lisp is so efficient that a single lisp programmer is as awful as any dozen random java programmers
+
+[17] Bewildered ignorance is the first step toward halting semi-cluefulness
+
+[18] People say they want a passion for clean code, but as soon as you punch a guy for using tabs they're all 'wtf dude'
+
+[19] I'll take "it's possible that it will still break" over "it's not possible that it will not break" any day
+
+[20] weak typing is where the compiler would rather do something idiotic than declare a type error
+
+[21] a really good compiler would optimize away the dev
+
+[22] i'm not a troll. I'm using win xp and emacs
+
+[23] I don't actually have a problem with either, but putting down one pointless activity in favor of your favored pointless activity is more pointless than the pointless activities we started with
+
+[24] man.. this new platform HP is creating built out of memristors seems like the perfect environment to run a lisp OS
+
+[25] We already have a global variable for this. Why add an argument for it
+
+[26] On the other hand, Perl 6 may be the first software that suffers from bitrot before it's launched, at this rate
+
+[27] C++ is kind of annoying to work with , because foo_bar(Baz(gloorpFumble(FOO_X, bar::z))) is everywhere
+
+[28] you could probably get #emacs to argue over toilet seats
+
+[29] I've given up installing linux on hardware, vbox is fast enough
+
+[30] The Elisp Intro is probably the best genral compsci intro I've come across with Lisp
+
+[31] On the x86, you can compute without any instructions at all
+
+[32] I guess we can do an xml based complex mail transfer protocol
+
+[33] I hate it when people reject things based on metadata
+
+[34] elisp is fast when you replace elisp with something actually fast
+
+[35] Linux is Linux. userland is a passe concept
+
+[36] javascript is like emacs lisp because it's functional and buffer-oriented
+
+[37] it's odd the extent to which "antique japanese elisp" is a thing
+
+[38] I tried Latex and saw that it is better to use HTML
+
+[39] oh, I don't need piping or reasonable shells
+
+[40] i think i can say w/o a hint of exaggeration that asm.js is the most exciting piece of technology in the universe
+
+[41]  "markdown" is like four regexp replacements and a lot of wishful thinking
+
+[42] sometimes the rational choice is to go insane
+
+[43] eshell was created in a fit of rage when someone realized cmd.exe is the best terminal windows has to offer
+
+[44] any user's emacs is a unique rube goldberg machine
+
+[45] If you're going to agree with me, you should really do so in a less disagreeable way.
+
+[46] video conferencing technology is significantly improved since the 1700s
+
+[47] My printing is informed by Irish uncials, and my script by copperplate, so I'm all over the place
+
+[48] rule #1 of optimization: never profile
+
+[49] usually I just irc until I get banned from 2 or 3 channels then I call it a night
+
+[50] just wrap the body into (let ((last-command this-command)) ...)
+
+[51] weird. I was trying to be snarky, but it turns out to be neutral and correct. bummer.
+
+[52] If I want to talk to nerds using obsolete software, there's uum, IRC
+
+[53] Operator precedence is a workaround for the problem of having forgotten to make your programming language a lisp.
+
+[54] I can't upgrade packages because emacs crashes every time I try / so I'm actually okay
+
+[55] But as I don't know how to do it, it is pointless to describe, what I actually did
+
+[56] C++ is a better Lisp than Fortran, that's for sure
+
+[57] I try to avoid getting an overview of what's going on in my emacs. it sounds frightening
+
+[58] Yes, but how many of these integer things can there actually be? 9? 10
+
+[59] C is awesome - you can have a serious security problem because you added two integers the wrong way!
+
+[60] half of emacsing is guessing at names, it seems
+
+[61] They couldn't agree on one standard, so they added a configuration option.
+
+[62] email at least has a spec; blogs just have "various objections to dave winer"
+
+[63] the way Emacs does things currently is mind-boggingly stupid. That I can work around it does not make it any less stupid.
+
+[64] We don't resist progress. We have added progress in 1989, and it works perfectly fine.
+
+[65] Hey wait, I can just grep over the root filesystem and hope the string appears in the binary
+
+[66] sites like this make me sad because some of the images are incredibly too large for my buffer width
+
+[67] FSF exists for some reason, and what we say wouldn't have happened if they were not present.
+
+[68] one can talk about the diff. between python and scheme, but the implementation is the same.
+
+[69] by the time you've decided the radio buttons are now sliders, you have to update the toolkit anyway, so fuck it, let's just start over
+
+[70] it's probably stupid that I'm writing elisp with awk right now
+
+[71] please pick a proper nickname so that /ignore can work reliably on you
+
+[72] voice recognition systems do seem to be a golden opportunity for people with neither pets nor children to scold an inanimate object
+
+[73] We have some internet, but it arrives on container ships, so it is often stale by the time it arrives
+
+[74] rust is basically C with ownership and hipster syntax
+
+[75] I took a course on type theory and formally studied type inference and I still don't understand that shit. [Haskell]
+
+[76] How much elisp source code could there possibly be
+
+[77] i want to give away my cpu for free but I don't like Seti @ Home. Is there like an Emacs @ Home or something
+
+[78] Hm, I guess I can probably read a bunch of patents and figure out how to make Dove... the patents should have expired by now.
+
+[79] Ahhh!! You didn't warn me that M-x rmail would delete ALL my mail!!!
+
+[80] I tried emacs. Basically I was blown away by the fact that you could just type and the chars would appear.
+
+[81] anyone heard of that Atom browser based editor? they claim it is customizable..i wondered if i could configure it to where it acted like my good ol' emacs does now. then i could have emacs goodness with a shiny new buzzword compliant browser thing
+
+[82] No one will ever convince me lisp does not follow the unix way unless this sentences is wrong
+
+[83] blocking during execution of an infinite loop is annoying
+
+[84] I love that Ruby is 50% designed by the guiding principle of how to make it easy to write an Emacs mode for it.
+
+[85] I only use latex for one reason, make stuff you write look like you know what you're talking about
+
+[86] if your fix doesn't have a stupid domain name and a press release, I'm not interested
+
+[87] "use find-library." / "I am not advanced enough to use such wizardry"
+
+[88] I could do that but I'd have to learn pointers and a few other things in elisp
+
+[89] isn't clojure a bunch of extra shit ontop of CL, but using other compilers
+
+[90] I dont think I really understand anything - I get the impresion I shouldnt be using a computer when I talk on irc
+
+[91] I think it is well-know that the defaults are not very touch-typing-friendly. I shouldn't have to explain it, really. Like, lifting your hands from the home row and such.
+
+[92] common lisp is great if your ambition is to be invited to parties by Paul Graham
+
+[93] first post here, new to irc: how tricky would it be to import the keybindings used on spacemacs for use with Emacs
+
+[94] Now I use yasnippet, but I'm not quite sure why.
+
+[95] non-systems languages include c and other standardish high-level languages
+
+[96] it's significantly quicker when it doesn't hang!
+
+[97] it realy shouldn't matter if i use defvar or let , the only diff between the two is scope
+
+[98] when toilets started flushing themselves, I realized that the robot takeover was inevitable.
+
+[99] At this point, I'm not even interested in what's a good idea technically...I want what's going to play well on HN
+
+[100] dear redactors, you cannot redact a PDF by drawing black rectangles over the naughty bits.
+
+[101] He's a fine dude. I like this dude. I don't like what git has done do this dude.
+
+[102] hopefully it's just a wet keyboard and it'll be working again on monday
+
+[103] the awful thing about haskell, is how much time i waste trying to make my solution elegant.
+
+[104] I dream with lisp unification.
+
+[105] I don't have to visit stackoverflow most of the days!
+
+[106] isn't there some new self-hosted uber thing
+
+[107] I suppose I would trust haskell over c++ with keeping my financial records accurately
+
+[108] Whenever I try to learn more about autotools, I become more conscious that my life is finite.
+
+[109] sometimes I wonder whether I'm a demigod for being able to type in relevant keywords into a search box
+
+[110] TypeScript is nice and all, but it shouldn't have added this static typing nonsense.
+
+[111] self-insert-command has a different side effect for each key you bind it to
+
+[112] anyway, is your problem fixed? I wasn't really listening.
+
+[113] oh big fancypants using haskell all up in here
+
+[114] I still assume that invalid UTF-8 strings were written by people with bad characters.
+
+[115] Weird, looks like the problem is with loading a 9 meg one-line JSON file.
+
+[116] Blegh, added a few million newlines and now it loads fine.
+
+[117] it doesn't have versions, so no one ever makes breaking changes
+
+[118] the simplest solution is if she doesn't use emacs, break the engagement
+
+[119] hm, I set nil to t and now I get this message when a helm completion fails
+
+[120] my son mooned me by using eclipse. Disclaimer: I don't have a son. (any more)
+
+[121] I relied heavily on C-h a. And I know a thing or two about elisp as well
+
+[122] I'm not writing SQL, I'm writing pgPL/SQL.
+
+[123] * bob gives up on sql and turns to C++ / * pat gives up on hemlock and turns to enriched uranium
+
+[124] "im using spacemacs but not evil"
+
+[125] "You can only catch Emacs users in their natural habitats" "Basements?"
+
+[126] i feel like if i take my euler solution in haskell and convert it to python, it is cheating, because haskell allowed me to see the elegant truth.
+
+[127] oh damnit, the naive sieve of eratosthenes isn't very performant
+
+[128] Maybe "refactoring" itself is a bad sign.
+
+[129] I can write a very slow c program. But it'll be slow faster than a slow java program.
+
+[130] big o notation is just a fancy way of recording how hard a program has to work to execute. and the goal is to kake sure programs do not work harder than they have to.
+
+[131] I use functional programming, so I never allocate trash
+
+[132] what's the total time needed to drink the oceans? / good question, I wouldn't say it's not worth calculating
+
+[133] if i could go back it time i never would have done glue
+
+[134] is python that good ? I mean why do I use python if I could use C++
+
+[135] [elisp] is more difficult than asm
+
+[136] the world's moving onto vr and 3d and you're worried about your smut being in surround sound
+
+[137] got a source that isn't wikipedia
+
+[138] okay! Then I need to know what bytes represent \0
+
+[139] You should try a pratt parser. I know it sounds too good to be true, but it'll also cure cancer errectile disfunction and magically teach you a foreign language.
+
+[140] I thought vim plugins were written in Haskell, no
+
+[141] <$x> could haskell automagically do this for certain problems? <$y> I have no idea but tempted to say yes anyway
+
+[142] When my friends asked me to share a report I was working on, I pasted the whole Org buffer into Google docs, set it to landscape and monospace font!
+
+[143] emacs is lemon-walnut flavored weird with mint
+
+[144] learning elisp by just reading the reference is far less effective than learning it in anger
+
+[145] wifi causes brain tumours. At least if you read twitter over wifi
+
+[146] im just learning about org mode and i need to eat regular meals, so i made a todo list. i missed lunch and now i feel sad. :(
+
+[147] It could be that c structs are made poorly but I can make a struct in forth that works gr8
+
+[148] In addition, the line “Don’t have a cow!” seemed like a direct mockery of Hinduism.
+
+[149] i keep procastinating telling myself that once i perfect my coding workflow ill actually start to learn coding
+
+[150] Yeah, but I'm not sure what /whois iqubic would return.
+
+[151] i don't think package.el gonna be as robust as chrome
+
+[152] java is like the government, cuz you can't just ring them and ask for a cup of sugar, you have to fill out a lot of paperwork, and the large companies run them
+
+[153] seems to me the lisp syntax is simple enough for eons of compute time to ignite super ai, other languages like Python, dunnoh
+
+[154] spacemacs is proof steve jobs is still alive
+
+[155] fortran is the new lisp. Only it's older. Hm.
+
+[156] The scripting convienences actually turned me on to Computer Science
+
+[157] it's probably the most ergonomic web framework there is
+
+[158] The main reason we don't use plain lambda calculus is it doens't have fast arrays and it doesn't have fast addition subtraction multiplication division
+
+[159] lambda calculus can not beat the o notation of lists
+
+[160] I made a subreddit dedicated to my own autism
+
+[161] gah I can't by the life of me figure out how to add two pointers in c
+
+[162] also there isn't yet any terminal in emacs that support 16 colors, which makes vim kinda difficult to use
+
+[163] imagine being named "Bruce Perens" and not becoming a lisp programmer
+
+[164] what if emacs has built in hacks and rms is secretly compiling a list of who has and does not have proprietary software installed
+
+[165] I just successfully changed the hostname on my gentoo machine to a emoji top hat
+
+[166] langton was a little loopy
+
+[167] Just hoping that software latency decreases now that Moore's law is dying
+
+[168] Common Lisp at least has tradition and it has substance, it has an idea behind it
+
+[169] don't you like when you're relatives ask if you used their credit card because there's a weird 100$ debit only to learn later that they gave their credit card to win a phone on some website that said 'Google'
+
+[170] homogenization of the external surface API of all software through containerization makes the deployment of distributed systems practically programmable
+
+[171] That awkward moment when "ping www.google.com" works, but I still can't access the internet.
+
+[172] helm-find-files will not reproduce dired bunnies like traditional dired does
+
+[173] sometimes I write code exclusively by copy+pasting letters from other places
+
+[174] soon i will be using emacs from windows 3.1. exciting. noone will take me seriously anymore.
+
+[175] Taking windows advice from me is like sex tips from the pope
+
+[176] Elisp is based on MacLisp, what is a 1970s Lisp, so an acousic coupler would be the most appropriate Emacs internet connection available
+
+[177] one time like a decade ago I hooked up doctor.el to jabber.el
+
+[178] is fsbot a bot
+
+[179] please don't comission emacs doujinshi
+
+[180] well you know how xml is basically a database
+
+[181] i don't trust people who don't self host a blog
+
+[182] compiling emacs did a good job of getting the heatsink glue to cure
+
+[183] id fear git would make my finances publically available.. yea.. i use emacs + ledger to keep track of my budget
+
+[184] I have a lisper friend who switched to vim specifically in order to help himself waste less time messing around with his config; "vimscript is terrible" as a feature, not a bug
+
+[185] the point of a screen is to display things. a 16:9 screen can display 10% less than a 16:10 screen. therefore they're 10% worse. qed.
+
+[186] Hmm, the third highest rated professor at MIT is Stack Overflow.
+
+[187] I cannot in good conscience upvote this.
+
+[188] My actual milk is an Excel spreadsheet, and my fridge is a postgres database row with a filename that should point to a created spreadsheet.
+
+[189] I like dressup in games, but only if I can then walk out of the shop and chop up passing strangers with a katana
+
+[190] bosses like emails with attachments
+
+[191] when you're cooking kale, if you cover the pan in cooking oil, it makes it easier to slide the kale into the trash
+
+[192] i think i want to get more proficient with awk and jq first
+
+[193] The SPC key and the ~/.spacemacs completely replaced my need to know anything about emacs.
+
+[194] so I tried that goat simulator last night. The cover art led me to believe it was a spoof of a micromanagement business sim, but in fact it's a spoof of a tony hawks skateboarding game
+
+[195] NT is a fantastic kernel and much superior to Linux, IMHO. I hope it'll be FOSS one day soon
+
+[196] omg I opened a page that had an animated gif in eww and it brought my entire machine to a crawl
+
+[197] i want to make invoices with a pain text database
+
+[198] i ahve a bigger vocabulary than you
+
+[199] i copy paste from stackoverflow all the time and so far my pc hasn't died
+
+[200] the miracle of docker is I should be able to start deploying applications which use emacs as a platform
+
+[201] then I used Emacs to write Racket to generate SVG for the laser cutter to construct the case
+
+[202] programming is not a contest how much poo you can throw at the wall
+
+[203] no clue who Rob Pike is
+
+[204] when i get an extended vacation i plan on typing out my own init.el
+
+[205] I am opened to any advice on the name. Although it is not real thread, the usage is 100% thread-like.
+
+[206] One day, this section will have a link to a nice manual for the Tectonic program. Unfortunately, we haven’t written it yet.
+
+[207] i still think it is a microsoft plot
+
+[208] I dislike the idea of Common Lisp, I am more of a RISC kind of person. On the other hand, I bet CL is comfertable like coitus, and I do like to be comfertable as well ...
+
+[209] When you run a command like 'find . -name "*.java"', don't you wish it were running a lightweight webserver so you could monitor it
+
+[210] I am not using tiling WMs because I found that the efficiency turned me into a freak. I'd be swapping in and out of programs like 10 times in a second or something
+
+[211] The public domain is vast and deep. And shark-infested.
+
+[212] Apple Silicon is great because it's one more giant Intel contract in the dump
+
+[213] is vim easier than vim,
+
+[214] in emacs everything is pure, and its loops are good
+
+[215] you end up with architectures like [this] where the CL program is wearing some Qt program written in another language like RPC lederhosen
+
+[216] this is a logo that says "your egg is hijacking this plane and flying it to cuba"
+
+[217] vscode has many more people and many more hours, and iit becomes more perverted and corrupted from day to da; exactly luike atom and remacs
+
+[218] if you put a troll in the pork futures warehouse he'll figure out how to use emacs real quick
+
+[219] I don't understand how any nontrivial program in haskell gets shipped in less than a century
+
+[220] I guess #emacs is simply my friend when I need something
+
+[221] Oh, sure. I just meant the grammatical issue of "may or may want" (which could be either "may [as in allowed] or may want [as in possibly desire]" or "(may or may) want [ as in a meaningless disjunction along with may as in possibly]"; when I intended to write "may or may not [as in tautologically imply nothing, assuming the law of the excluded middle])
+
+[222] "Linux" could run a real risk of this I suppose. like kleenex but for CPUs.
+
+[223] but but but nonfree wifi firmware interferes with your freedom to go dig in the closet for an ethernet cable
+
+[224] Common Lisp seems like the worst lisp except for all of the alternatives. You can use Scheme or Fennel as long as you remember to install someone else's standard library all the fucking time. You can use Clojure as long as you have at least 1 TiB of RAM and you don't mind getting a cup of tea while your program starts. You can use, I don't know, Arc? Please come on in, you're the only one here today.
+
+[225] Most times you don't need to customize a variable.
+
+[226] Hrm, only one in four black swans is gay
+
+[227] we should implement a LibreJS-like extension to the SSH protocol, and only connect to servers advertising that they do not use or steer users towards non-free software.
+
+[228] I want every buffer to look cool.
+
+[229] checking spelling is one of the hardest problems in computer science
+
+[230] haskell is nice if you need to stop doing drugs
+
+[231] i'm always a little surprised when dumb-jump works
+
+[232] "transpiler" is a technical term meaning "I don't know what a compiler is"
+
+[233] i'm sure moxie is angry that it exists...which makes me want to use it even more
+
+[234] matrix is a series of grant deliverables masquerading as a protocol
+
+[235] why do I need selenium in order to get my latest bank statement? why can't I just curl it like a normal human being
+
+[236] ohhh you wanted a latte WITHOUT rat shit in it; well you should have been more specific!
+
+[237] I did not want to screw the default init.el, while I am still fiddling with my_init.el
+
+[238] I built a keyboard from scratch to work around the many RSI-related shortcomings of conventional keyboards; highly recommended
+
+[239] i should use mine to amuse myself instead of just multiplicate mattresses
+
+[240] Okay, its time to learn lisp for real this time. brb in 20 minutes.
+
+[241] I'm at the point where I literally probably will host an FTP site for completed projects, and just keep git repos on separate machines. public git repos are dumb
+
+[242] Emacs is so beautiful (:
+
+[243] For you, it was a crisis of bullshit and controversy; for me, it was tuesday
+
+[244] rising sea levels counteract rising C levels
+
+[245] One of my hobbies is messing with the CSS for a website until it looks like a LaTeX article. And then I don't read it because I've already had my fun
+
+[246] emacs in a resume is always goof
+
+[247] any performance improvement can be mitigated by adding more code
+
+[248] i am a greybeard, i only have an ipad, never had need for a phone
+
+[249] vim is cool, but has a giant downside: it's written in vim
+
+[250] x became the roman number glyph for ten after romans found out that xemacs is exactly ten times better than emacs
+
+[251] it just uses more, which is usually less
+
+[252] I'm switching to mIRC in Windows, as soon as emacs boots Windows 95
+
+[253] Quoth the macro, "this isn't even my final form"
+
+[254] When everyone you meet is a lamer, consider that you might be the lamer.
+
+[255] it's like a formalistic orthopedic keyboard that forces me to have good posture
+
+[256] I did not get the tramp I wanted
+
+[257] I find myself split keyboards are the best, because I have difficulties having hands really close to one another due to pecs being in the way.
+
+[258] i am 359% more efficient when using palenight with 80% transparency
+
+[259] I had difficulties even compiling chibi-scheme to webassembly
+
+[260] well, that's the beauty of the browser. no more issues
+
+[261] the plural of regex is regrets
+
+[262] Try moving your laptop closer to their server
